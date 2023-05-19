@@ -1,0 +1,141 @@
+{
+    "effects": [
+        {
+          "name": "Vital Shot",
+          "description": {
+            "1": "Deal 1d8 Mundane Damage of choice, test fate, on success target is Baffled.",
+            "2": "Deal 1d8 Mundane Damage of choice, test fate, on success target is Sapped.",
+            "3": "Deal 1d8 Mundane Damage of choice, test fate, on success target is Stunned."
+          },
+          "upgrades": [
+            {
+              "name": "With Weapon",
+              "description": {
+                "1": "Damage as wielded weapon instead."
+              }
+            },
+            {
+              "name": "Apply Bleed",
+              "description": {
+                "2": "And target gains 1d4 bleeding."
+              }
+            },
+            {
+                "name": "Damaging Boon",
+                "description": {
+                  "2": "Roll damage with boon."
+                }
+              }
+          ]
+        },
+      {
+        "name": "Force Blast",
+        "description": {
+          "1": "Deal 1d10 Mundane Damage of choice at a range of 1z.",
+          "2": "Deal 1d10 Mundane Damage of choice at a range of 2z.",
+          "3": "Deal 1d10 Mundane Damage of choice at a range of 3z."
+        },
+        "upgrades": [
+            {
+              "name": "Knockdown",
+              "description": {
+                "1": "Test fate, on success target is knocked prone"
+              }
+            },
+            {
+              "name": "Apply Bleed",
+              "description": {
+                "2": "Target gains bleeding 1"
+              }
+            },
+            {
+                "name": "Stat Check",
+                "description": {
+                  "2": "+ Grit or + Tempo"
+                }
+              }
+          ]
+        },
+      {
+        "name": "Elemental Grasp",
+        "description": {
+          "1": "Deal 1d8 Natural Damage of choice.",
+          "2": "Deal 1d10 Natural Damage of choice.",
+          "3": "Deal 1d12 Natural Damage of choice."
+        },
+        "upgrades": [
+            {
+              "name": "Visionary",
+              "description": {
+                "1": "+ Vision"
+              }
+            },
+            {
+              "name": "Stunning",
+              "description": {
+                "2": "Test fate, on success target is stunned"
+              }
+            },
+            {
+                "name": "MultiFaceted",
+                "description": {
+                  "2": "Add a second damage type to the attack"
+                }
+              }
+          ]
+        }
+    ],
+    "limits": [
+      {
+        "name": "Standard",
+        "description": {
+          "1": "2 maximum uses as an action.",
+          "2": "3 maximum uses as an action.",
+          "3": "4 maximum uses as an action."
+        }
+      },
+      {
+        "name": "Downtime",
+        "description": {
+          "1": "3 maximum uses, only usable outside combat.",
+          "2": "4 maximum uses, only usable outside combat.",
+          "3": "5 maximum uses, only usable outside combat."
+        }
+      },
+      {
+        "name": "Ritual",
+        "description": {
+          "1": "4 maximum uses, takes half an hour to use.",
+          "2": "5 maximum uses, takes half an hour to use.",
+          "3": "6 maximum uses, takes half an hour to use."
+        }
+      }
+    ],
+    "tolls": [
+      {
+        "name": "Kleptomancy",
+        "description": {
+          "1": "Steal an item worth 100 to gain 1 use of this ability.",
+          "2": "Steal an item worth 20Æ to gain 1 use of this ability.",
+          "3": "Steal an item worth 1Æ to gain 1 use of this ability."
+        }
+      },
+      {
+        "name": "Arba Vita",
+        "description": {
+          "1": "Gain 1 use of this ability upon planting a seed, sapling, or nut in soft fertile soil.",
+          "2": "Gain 1 use of this ability upon planting a seed, sapling, or nut in an outdoor space.",
+          "3": "Gain 1 use of this ability upon planting a seed, sapling, or nut anywhere."
+        }
+      },
+      {
+        "name": "Rested",
+        "description": {
+          "1": "Gain 2 uses when you sleep a full night in an inn or home.",
+          "2": "Gain 2 uses when you sleep in a safe structure such as a cave or lean-to.",
+          "3": "Gain 2 uses when you sleep a full night in a bedroll or other comfortable make-shift bed."
+        }
+      }
+    ]
+  }
+  

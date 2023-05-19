@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ability Generator</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+  <h1>Ability Generator</h1>
+  <div class="container">
+    <div class="select-container">
+      <label for="effect">Effect:</label>
+      <select id="effect" multiple></select>
+      <div class="upgrade-container">
+        <label>Upgrades:</label>
+        <div id="upgrades">
+          <input type="checkbox" class="upgrade-checkbox" name="upgrade" value="upgrade-1"> 1
+          <input type="checkbox" class="upgrade-checkbox" name="upgrade" value="upgrade-2"> 2
+          <input type="checkbox" class="upgrade-checkbox" name="upgrade" value="upgrade-3"> 3
+        </div>
+      </div>
+      <div class="power-level-container">
+        <label>Power Level:</label>
+        <div class="checkbox-container">
+          <input type="checkbox" id="effect-1" name="power-level-effect" value="1">
+          <label for="effect-1">1</label>
+          <input type="checkbox" id="effect-2" name="power-level-effect" value="2">
+          <label for="effect-2">2</label>
+          <input type="checkbox" id="effect-3" name="power-level-effect" value="3">
+          <label for="effect-3">3</label>
+        </div>
+      </div>
+    </div>
+    <div class="select-container">
+      <label for="limit">Limit:</label>
+      <select id="limit" multiple></select>
+      <div class="power-level-container">
+        <label>Power Level:</label>
+        <div class="checkbox-container">
+          <input type="checkbox" id="limit-1" name="power-level-limit" value="1">
+          <label for="limit-1">1</label>
+          <input type="checkbox" id="limit-2" name="power-level-limit" value="2">
+          <label for="limit-2">2</label>
+          <input type="checkbox" id="limit-3" name="power-level-limit" value="3">
+          <label for="limit-3">3</label>
+        </div>
+      </div>
+    </div>
+    <div class="select-container">
+      <label for="toll">Toll:</label>
+      <select id="toll" multiple></select>
+      <div class="power-level-container">
+        <label>Power Level:</label>
+        <div class="checkbox-container">
+          <input type="checkbox" id="toll-1" name="power-level-toll" value="1">
+          <label for="toll-1">1</label>
+          <input type="checkbox" id="toll-2" name="power-level-toll" value="2">
+          <label for="toll-2">2</label>
+          <input type="checkbox" id="toll-3" name="power-level-toll" value="3">
+          <label for="toll-3">3</label>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button id="generate-ability">Generate Ability</button>
+      <button id="copy-ability">Copy to Clipboard</button>
+    </div>
+    <div class="output-container">
+      <label for="ability-text">Generated Ability:</label>
+      <textarea id="ability-text" rows="5" readonly></textarea>
+      <div id="copy-notification"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
