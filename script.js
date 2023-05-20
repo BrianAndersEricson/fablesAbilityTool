@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch('abilities.json')
     .then(response => response.json())
     .then(data => {
+      // DOM elements
       const effectSelect = document.getElementById('effect');
       const limitSelect = document.getElementById('limit');
       const tollSelect = document.getElementById('toll');
@@ -15,20 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const copyButton = document.getElementById('copy-ability');
 
       // Populate the multi-select options and set tooltips
-      data.effects.forEach(effect => {
-        const option = createOption(effect.name);
-        effectSelect.appendChild(option);
-      });
-
-      data.limits.forEach(limit => {
-        const option = createOption(limit.name);
-        limitSelect.appendChild(option);
-      });
-
-      data.tolls.forEach(toll => {
-        const option = createOption(toll.name);
-        tollSelect.appendChild(option);
-      });
+      populateOptions(effectSelect, data.effects);
+      populateOptions(limitSelect, data.limits);
+      populateOptions(tollSelect, data.tolls);
 
       // Add event listeners
       checkboxes.forEach(checkbox => checkbox.addEventListener('change', handleCheckboxChange));
@@ -36,7 +26,19 @@ document.addEventListener('DOMContentLoaded', function () {
       generateButton.addEventListener('click', generateAbility);
       copyButton.addEventListener('click', copyToClipboard);
 
-      // Function to create an option element
+      // Initial tooltips update
+      updateTooltips.call(powerLevelCheckboxes[0]);
+
+      // ----------------- Function Definitions ---------------------
+
+      // Function to copy generated ability text to clipboard
+      function copyToClipboard() {
+        abilityOutput.select();
+        document.execCommand('copy');
+        copyNotification.textContent = 'Ability copied to clipboard!';
+      }
+
+      // Create and append option elements
       function createOption(value) {
         const option = document.createElement('option');
         option.value = value;
@@ -44,66 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return option;
       }
 
-      // Function to handle checkbox change event
-      function handleCheckboxChange(event) {
-        const checkedCheckbox = event.target;
-        const isChecked = checkedCheckbox.checked;
-        const checkboxName = checkedCheckbox.name;
-
-        checkboxes.forEach(checkbox => {
-          if (checkbox.name === checkboxName && checkbox !== checkedCheckbox && !checkbox.classList.contains('upgrade-checkbox')) {
-            checkbox.disabled = isChecked;
-          }
-
-          if (checkbox.name !== checkboxName && checkbox.value === checkedCheckbox.value && !checkbox.classList.contains('upgrade-checkbox')) {
-            checkbox.disabled = isChecked;
-          }
-        });
-
-        if (isChecked && checkedCheckbox.classList.contains('upgrade-checkbox')) {
-          const upgradeDescription = getUpgradeDescription(checkedCheckbox.value); // Pass the value attribute
-          const upgradeTooltip = checkedCheckbox.nextElementSibling;
-          upgradeTooltip.title = upgradeDescription;
-        }
-      }
-
-      // Function to get the upgrade description based on the selected upgrade
-      function getUpgradeDescription(upgradeNumber) {
-        const selectedEffect = effectSelect.value;
-        const effect = data.effects.find(effect => effect.name === selectedEffect);
-
-        if (!effect) return '';
-
-        // Convert the upgradeNumber to a string, because the upgrade keys in your data are strings
-        const upgradeKey = String(upgradeNumber);
-        const upgrade = effect.upgrades[upgradeKey];
-
-        return upgrade ? upgrade.description : '';
-      }
-
-      // Function to update the tooltip text
-      function updateTooltips() {
-        const selectedPowerLevel = this.value;
-        updateTooltipText(effectSelect, data.effects, selectedPowerLevel);
-        updateTooltipText(limitSelect, data.limits, selectedPowerLevel);
-        updateTooltipText(tollSelect, data.tolls, selectedPowerLevel);
-      }
-
-      // Function to update the tooltip text for a select element
-      function updateTooltipText(selectElement, dataItems, powerLevel) {
-        const options = selectElement.options;
-        for (let i = 0; i < options.length; i++) {
-          const itemName = options[i].value;
-          const item = dataItems.find(item => item.name === itemName);
-          const tooltipText = item.description[powerLevel];
-          options[i].title = tooltipText;
-        }
-      }
-
-      // Set initial tooltips based on default power level
-      updateTooltips.call(powerLevelCheckboxes[0]);
-
-      // Function to generate ability based on selected components
+      // Generate ability text based on selected components
       function generateAbility() {
         const selectedEffect = effectSelect.value;
         const selectedLimit = limitSelect.value;
@@ -135,23 +78,68 @@ document.addEventListener('DOMContentLoaded', function () {
         abilityOutput.textContent = abilityText;
       }
 
-      // Function to copy generated ability text to clipboard
-      function copyToClipboard() {
-        abilityOutput.select();
-        document.execCommand('copy');
-        copyNotification.textContent = 'Ability copied to clipboard!';
+      // Handle checkbox change event
+      function handleCheckboxChange(event) {
+        const checkedCheckbox = event.target;
+        const isChecked = checkedCheckbox.checked;
+        const checkboxName = checkedCheckbox.name;
+
+        checkboxes.forEach(checkbox => {
+          if (checkbox.name === checkboxName && checkbox !== checkedCheckbox && !checkbox.classList.contains('upgrade-checkbox')) {
+            checkbox.disabled = isChecked;
+          }
+
+          if (checkbox.name !== checkboxName && checkbox.value === checkedCheckbox.value && !checkbox.classList.contains('upgrade-checkbox')) {
+            checkbox.disabled = isChecked;
+          }
+        });
+
+        if (isChecked && checkedCheckbox.classList.contains('upgrade-checkbox')) {
+          const upgradeDescription = getUpgradeDescription(checkedCheckbox.value); // Pass the value attribute
+          const upgradeTooltip = checkedCheckbox.nextElementSibling;
+          upgradeTooltip.title = upgradeDescription;
+        }
       }
 
-      // Helper function to get selected upgrades
-      function getSelectedUpgrades(checkboxes) {
-        const selectedUpgrades = [];
-        for (let i = 0; i < checkboxes.length; i++) {
-          const checkbox = checkboxes[i];
-          if (checkbox.checked) {
-            selectedUpgrades.push(checkbox.value);
-          }
+      // Get upgrade description for selected upgrade
+      function getUpgradeDescription(upgradeNumber) {
+        const selectedEffect = effectSelect.value;
+        const effect = data.effects.find(effect => effect.name === selectedEffect);
+
+        if (!effect) return '';
+
+        // Convert the upgradeNumber to a string, because the upgrade keys in your data are strings
+        const upgradeKey = String(upgradeNumber);
+        const upgrade = effect.upgrades[upgradeKey];
+
+        return upgrade ? upgrade.description : '';
+      }
+
+      // Populate options and tooltips for select element
+      function populateOptions(selectElement, dataItems) {
+        dataItems.forEach(item => {
+          const option = createOption(item.name);
+          selectElement.appendChild(option);
+        });
+      }
+
+      // Update tooltip text for select element
+      function updateTooltipText(selectElement, dataItems, powerLevel) {
+        const options = selectElement.options;
+        for (let i = 0; i < options.length; i++) {
+          const itemName = options[i].value;
+          const item = dataItems.find(item => item.name === itemName);
+          const tooltipText = item.description[powerLevel];
+          options[i].title = tooltipText;
         }
-        return selectedUpgrades;
+      }
+
+      // Update tooltips for all power levels
+      function updateTooltips() {
+        const selectedPowerLevel = this.value;
+        updateTooltipText(effectSelect, data.effects, selectedPowerLevel);
+        updateTooltipText(limitSelect, data.limits, selectedPowerLevel);
+        updateTooltipText(tollSelect, data.tolls, selectedPowerLevel);
       }
     });
 });
