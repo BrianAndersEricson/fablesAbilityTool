@@ -1,2 +1,2 @@
 # fables-charGen
-A character generator for Fables of Galaeffa
+An ability creation tool for Fables of Galaeffa

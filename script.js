@@ -61,17 +61,23 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (isChecked && checkedCheckbox.classList.contains('upgrade-checkbox')) {
-          const upgradeDescription = getUpgradeDescription(checkedCheckbox.value);
+          const upgradeDescription = getUpgradeDescription(checkedCheckbox.value); // Pass the value attribute
           const upgradeTooltip = checkedCheckbox.nextElementSibling;
           upgradeTooltip.title = upgradeDescription;
         }
       }
 
       // Function to get the upgrade description based on the selected upgrade
-      function getUpgradeDescription(upgradeName) {
+      function getUpgradeDescription(upgradeNumber) {
         const selectedEffect = effectSelect.value;
         const effect = data.effects.find(effect => effect.name === selectedEffect);
-        const upgrade = effect.upgrades[upgradeName];
+
+        if (!effect) return '';
+
+        // Convert the upgradeNumber to a string, because the upgrade keys in your data are strings
+        const upgradeKey = String(upgradeNumber);
+        const upgrade = effect.upgrades[upgradeKey];
+
         return upgrade ? upgrade.description : '';
       }
 
@@ -100,7 +106,6 @@ document.addEventListener('DOMContentLoaded', function () {
       // Function to generate ability based on selected components
       function generateAbility() {
         const selectedEffect = effectSelect.value;
-        const selectedUpgrades = getSelectedUpgrades(upgradeCheckboxes);
         const selectedLimit = limitSelect.value;
         const selectedToll = tollSelect.value;
         const selectedEffectPowerLevel = document.querySelector('input[name="power-level-effect"]:checked').value;
@@ -115,10 +120,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const limitDescription = limit.description[selectedLimitPowerLevel];
         const tollDescription = toll.description[selectedTollPowerLevel];
 
+        const selectedUpgrades = Array.from(upgradeCheckboxes)
+          .filter(checkbox => checkbox.checked)
+          .map(checkbox => checkbox.value.split('-')[1]); // Split the checkbox value and take the second part, which is the upgrade number
+
+        const upgradeDescriptions = selectedUpgrades.map(upgradeNumber => getUpgradeDescription(upgradeNumber)); // Retrieve the upgrade descriptions
+
         let abilityText = `${selectedEffect} ${selectedLimit} ${selectedToll}\n${effectDescription} ${limitDescription} ${tollDescription}`;
 
-        if (selectedUpgrades.length > 0) {
-          abilityText += '\nUpgrades: ' + selectedUpgrades.join(', ');
+        if (upgradeDescriptions.length > 0) {
+          abilityText += '\nUpgrades: ' + upgradeDescriptions.join(' ');
         }
 
         abilityOutput.textContent = abilityText;
