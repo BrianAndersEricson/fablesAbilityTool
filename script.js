@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   // Fetch the JSON data
-  fetch('abilities.json')
+  fetch('./fables-ability-tool-2/src/abilities.json')
     .then(response => response.json())
     .then(data => {
       // DOM elements

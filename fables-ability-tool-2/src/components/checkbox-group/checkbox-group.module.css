@@ -1,0 +1,8 @@
+:global(.ability-generator-app) .form-control {
+    display: flex;
+    flex-direction: row;
+}
+
+.label-legend {
+    float: left;
+}

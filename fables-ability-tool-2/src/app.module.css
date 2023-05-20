@@ -1,0 +1,39 @@
+:root {
+    --space-xxs: 4px;
+    --space-xs: 8px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-xxl: 64px;
+}
+
+.app-container {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.header {
+    text-align: center;
+    color: navy;
+}
+
+.ability-configurator {
+    margin: var(--space-xl) auto 0;
+    max-width: 600px;
+    padding: var(--space-md);
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.ability-config {
+    display: flex;
+    flex-direction: column;
+}
