@@ -1,3 +1,4 @@
+import {union} from 'lodash-es';
 import React, { useState, useEffect } from "react";
 import { CheckboxGroup } from "../checkbox-group/checkbox-group";
 import { SelectGroup } from "../select-group/select-group";
@@ -11,19 +12,27 @@ export const AbilityConfiguration = ({
 	powerLevelOptions = [],
 	selectedPowerlevel,
 	setSelectedPowerlevel,
-	upgradeOptions,
+	disabledPowerlevels = [],
+	upgradeOptions = [],
 	selectedUpgrades,
 	setSelectedUpgrades,
 }) => {
 	/* START - Options */
 	const handleSelectChange = (event) => {
-		setSelectedOption(event.target.value);
+		const { options } = event.target;
+		let selections = [...options]
+			.filter((option) => option.selected)
+			.map((option) => option.value)
+			.slice(0, 1);
+		console.log("onchange", event.target.value, selections);
+		setSelectedOption(selections.length > 0 ? selections[0] : "");
 	};
 	/* END - Options */
 
 	/* START - Powerlevels */
 	const [selectedPowerLevels, setSelectedPowerLevels] = useState([]);
-	const [disabledPowerLevels, setDisabledPowerLevels] = useState([]);
+	const [disabledInternalPowerLevels, setDisabledInternalPowerLevels] =
+		useState([]);
 
 	const onPowerLevelChange = (selectedValues) => {
 		setSelectedPowerLevels(selectedValues); // set "multiple" for the downstream component
@@ -33,8 +42,8 @@ export const AbilityConfiguration = ({
 	};
 
 	useEffect(() => {
-		if (selectedPowerLevels.length > 0) {
-			setDisabledPowerLevels(
+		if (disabledPowerlevels.length === 0 && selectedPowerLevels.length > 0) {
+			setDisabledInternalPowerLevels(
 				powerLevelOptions
 					.filter(
 						(option) => !selectedPowerLevels.includes(option.value)
@@ -42,19 +51,23 @@ export const AbilityConfiguration = ({
 					.map((option) => option.value)
 			);
 		} else {
-			setDisabledPowerLevels([]);
+			setDisabledInternalPowerLevels([]);
 		}
-	}, [powerLevelOptions, selectedPowerLevels]);
+	}, [powerLevelOptions, selectedPowerLevels, disabledPowerlevels]);
 
 	useEffect(() => {
 		setSelectedPowerLevels(
 			selectedPowerlevel !== undefined ? [selectedPowerlevel] : []
 		);
 	}, [selectedPowerlevel]);
+
+    const combinedDisabledPowerlevels = union(disabledPowerlevels, disabledInternalPowerLevels).sort((a,b) => a-b);
 	/* END - Powerlevels */
 
 	/* START - Upgrades */
-	const [selectedInternalUpgrades, setSelectedInternalUpgrades] = useState([]);
+	const [selectedInternalUpgrades, setSelectedInternalUpgrades] = useState(
+		[]
+	);
 	// const [disabledUpgrades, setDisabledUpgrades] = useState([]);
 
 	const onUpgradesChange = (selectedValues) => {
@@ -81,7 +94,7 @@ export const AbilityConfiguration = ({
 	}, [selectedUpgrades]);
 	/* END - Upgrades */
 
-	return (
+    return (
 		<div className={styles["container"]}>
 			<SelectGroup
 				label={label}
@@ -95,7 +108,7 @@ export const AbilityConfiguration = ({
 					label="Power Level"
 					options={powerLevelOptions}
 					selectedValues={selectedPowerLevels}
-					disabledValues={disabledPowerLevels}
+					disabledValues={combinedDisabledPowerlevels}
 					onChange={onPowerLevelChange}
 				/>
 			)}
