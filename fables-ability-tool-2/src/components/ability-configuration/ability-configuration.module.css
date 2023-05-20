@@ -3,10 +3,6 @@
     flex-direction: column;
 }
 
-.select-group-container {
-    margin: 0;
-}
-
 .checkbox-container {
     margin-top: var(--space-xxs);
 }

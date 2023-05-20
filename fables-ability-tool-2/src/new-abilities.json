@@ -1,0 +1,97 @@
+{
+  "abilityComponents": {
+    "effects": {
+      "Vital Shot": {
+        "name": "Vital Shot",
+        "powerlevels": {
+          "1": "Deal 1d8 Mundane Damage of choice, test fate, on success target is Baffled.",
+          "2": "Deal 1d8 Mundane Damage of choice, test fate, on success target is Sapped.",
+          "3": "Deal 1d8 Mundane Damage of choice, test fate, on success target is Stunned."
+        },
+        "upgrades": {
+          "1": "Damage as wielded weapon instead.",
+          "2": "And target gains 1d4 bleeding.",
+          "3": "Roll damage with boon."
+        }
+      },
+      "Force Blast": {
+        "name": "Force Blast",
+        "powerlevels": {
+          "1": "Deal 1d10 Mundane Damage of choice at a range of 1z.",
+          "2": "Deal 1d10 Mundane Damage of choice at a range of 2z.",
+          "3": "Deal 1d10 Mundane Damage of choice at a range of 3z."
+        },
+        "upgrades": {
+          "1": "Test fate, on succes target is knocked prone",
+          "2": "Target gains bleeding 1",
+          "3": "+ Grit or + Tempo"
+        }
+      },
+      "Elemental Grasp": {
+        "name": "Elemental Grasp",
+        "powerlevels": {
+          "1": "Deal 1d8 Natural Damage of choice.",
+          "2": "Deal 1d10 Natural Damage of choice.",
+          "3": "Deal 1d12 Natural Damage of choice."
+        },
+        "upgrades": {
+          "1": "+ Vision",
+          "2": "Test fate, on success target is stunned",
+          "3": "Add a second damage type to the attack"
+        }
+      }
+    },
+    "limits": {
+      "Standard": {
+        "name": "Standard",
+        "powerlevels": {
+          "1": "2 maximum uses as an action.",
+          "2": "3 maximum uses as an action.",
+          "3": "4 maximum uses as an action."
+        }
+      },
+      "Downtime": {
+        "name": "Downtime",
+        "powerlevels": {
+          "1": "3 maximum uses, only usable outside combat.",
+          "2": "4 maximum uses, only usable outside combat.",
+          "3": "5 maximum uses, only usable outside combat."
+        }
+      },
+      "Ritual": {
+        "name": "Ritual",
+        "powerlevels": {
+          "1": "4 maximum uses, takes half an hour to use.",
+          "2": "5 maximum uses, takes half an hour to use.",
+          "3": "6 maximum uses, takes half an hour to use."
+        }
+      }
+    },
+    "tolls": {
+      "Kleptomancy": {
+        "name": "Kleptomancy",
+        "powerlevels": {
+          "1": "Steal an item worth 100 to gain 1 use of this ability.",
+          "2": "Steal an item worth 20Æ to gain 1 use of this ability.",
+          "3": "Steal an item worth 1Æ to gain 1 use of this ability."
+        }
+      },
+      "Arba Vita": {
+        "name": "Arba Vita",
+        "powerlevels": {
+          "1": "Gain 1 use of this ability upon planting a seed, sapling, or nut in soft fertile soil.",
+          "2": "Gain 1 use of this ability upon planting a seed, sapling, or nut in an outdoor space.",
+          "3": "Gain 1 use of this ability upon planting a seed, sapling, or nut anywhere."
+        }
+      },
+      "Rested": {
+        "name": "Rested",
+        "powerlevels": {
+          "1": "Gain 2 uses when you sleep a full night in an inn or home.",
+          "2": "Gain 2 uses when you sleep in a safe structure such as a cave or lean-to.",
+          "3": "Gain 2 uses when you sleep a full night in a bedroll or other comfortable make-shift bed."
+        }
+      }
+    }
+  }
+}
